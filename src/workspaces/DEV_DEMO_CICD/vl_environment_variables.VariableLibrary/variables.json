@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/variables/1.0.0/schema.json",
+  "variables": [
+    {
+      "name": "bronze_lakehouse_id",
+      "note": "",
+      "type": "Guid",
+      "value": "3f71e096-6e00-4390-ba84-7c10f2473fd0"
+    },
+    {
+      "name": "workspace_id",
+      "note": "",
+      "type": "Guid",
+      "value": "15134447-7ad1-4f3e-9920-e13dfe9f10b8"
+    },
+    {
+      "name": "gold_lakehouse_id",
+      "note": "",
+      "type": "Guid",
+      "value": "feae2f72-f599-4dd3-a03b-aacde0b28d89"
+    },
+    {
+      "name": "workspace_name",
+      "note": "",
+      "type": "String",
+      "value": "DEV_DEMO_CICD"
+    },
+    {
+      "name": "nt_01_load_csv_to_delta_id",
+      "note": "",
+      "type": "Guid",
+      "value": "4c76181b-66fc-44ad-bc84-547e23b54f1c"
+    },
+    {
+      "name": "nt_02_load_gold_id",
+      "note": "",
+      "type": "Guid",
+      "value": "b766d8d6-e8a0-475b-96c4-c9cbcc9fc208"
+    },
+    {
+      "name": "ds_sales_id",
+      "note": "",
+      "type": "Guid",
+      "value": "007e46c4-a951-4b1c-998a-a7f8d9640f51"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "sc_SharePoint_Sales",
+    "path": "/Files",
+    "target": {
+      "type": "OneDriveSharePoint",
+      "oneDriveSharePoint": {
+        "connectionId": "708e9f46-0959-41e6-b780-29066959a79c",
+        "location": "https://5ldj4c.sharepoint.com",
+        "subpath": "/sites/SalesandMarketing/Shared Documents/General/Sales"
+      }
+    }
+  }
+]

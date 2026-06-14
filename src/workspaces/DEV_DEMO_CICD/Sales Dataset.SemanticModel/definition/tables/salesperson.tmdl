@@ -1,0 +1,59 @@
+table salesperson
+	lineageTag: b589ffcd-5c9b-4b8f-943e-3af7874e5a3d
+
+	column EmployeeKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 587f475f-f50e-4503-acfe-51aa80668e3c
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeID
+		dataType: string
+		lineageTag: 85168926-f9ec-4ea6-a4aa-f4bcdd18ee06
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Salesperson
+		dataType: string
+		lineageTag: 3588732c-a463-4605-8130-c2aadccc04f9
+		summarizeBy: none
+		sourceColumn: Salesperson
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: 48a41e8c-5f86-4022-9f1c-8f035373894c
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPN
+		dataType: string
+		lineageTag: b145fb56-50cc-4cf3-a483-e816072014a2
+		summarizeBy: none
+		sourceColumn: UPN
+
+		annotation SummarizationSetBy = Automatic
+
+	partition salesperson = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("zyac6zd57ajuplki3i3ba7skhm-i5cbgforpi7e7gja4e675hyqxa.datawarehouse.fabric.microsoft.com"),
+				    lh_gold = Source{[Name="lh_gold"]}[Data],
+				    dbo_salesperson = lh_gold{[Schema="dbo",Item="salesperson"]}[Data]
+				in
+				    dbo_salesperson
+
+	annotation PBI_ResultType = Table
+

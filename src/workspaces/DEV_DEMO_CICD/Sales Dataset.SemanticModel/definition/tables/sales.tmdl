@@ -1,0 +1,150 @@
+table sales
+	lineageTag: 0af108e6-9920-4255-82bd-efa6aedfbf12
+
+	measure #Cost = sum(sales[Cost])
+		formatString: #,0.00
+		lineageTag: 834bf94f-0544-4ac2-8c35-4fec9d8846d3
+
+	measure #Quantity = sum(sales[Quantity])
+		formatString: #,0
+		lineageTag: 09073689-7d92-4b56-8985-7304df8ad192
+
+	measure #Sales = sum(sales[Sales])
+		formatString: #,0.00
+		lineageTag: 92a8ecfe-2bc2-4938-a034-fa0b9d4ab2a4
+
+	measure #UnitPrice = sum(sales[UnitPrice])
+		formatString: #,0.00
+		lineageTag: 531e7b19-2311-45db-b131-84a54a8f104e
+
+	column SalesOrderNumber
+		dataType: string
+		lineageTag: dfa932de-50da-4eb3-9d14-19747f13bbc5
+		summarizeBy: none
+		sourceColumn: SalesOrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9106dffd-b431-449a-a66e-5c62772a5b53
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResellerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 499963f1-cf45-4500-b5a0-6a235e57cc29
+		summarizeBy: none
+		sourceColumn: ResellerKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b0f214cf-92dc-4513-b971-8fefbc246969
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 04f4afcc-29c5-4399-a3ef-f0e9ec187879
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7474b2b0-e3a8-4b2b-b7c5-e4816e2f3c88
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: double
+		isHidden
+		lineageTag: 57a69b41-cacd-4604-aa3a-33fc7f639d34
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Sales
+		dataType: double
+		isHidden
+		lineageTag: ddc29bef-1bb3-4386-873f-e4dd7b45273e
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Cost
+		dataType: double
+		isHidden
+		lineageTag: 4d022bb5-6217-4cb7-9480-98302eefcc67
+		summarizeBy: sum
+		sourceColumn: Cost
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OrderDateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 84e58889-7233-4032-a2c7-1a26493b1a6b
+		summarizeBy: none
+		sourceColumn: OrderDateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sales = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("zyac6zd57ajuplki3i3ba7skhm-i5cbgforpi7e7gja4e675hyqxa.datawarehouse.fabric.microsoft.com"),
+				    lh_gold = Source{[Name="lh_gold"]}[Data],
+				    dbo_sales = lh_gold{[Schema="dbo",Item="sales"]}[Data]
+				in
+				    dbo_sales
+
+	annotation PBI_ResultType = Table
+

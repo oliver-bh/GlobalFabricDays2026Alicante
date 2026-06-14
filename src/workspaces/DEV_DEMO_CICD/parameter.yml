@@ -1,0 +1,61 @@
+find_replace:
+  - find_value: "15134447-7ad1-4f3e-9920-e13dfe9f10b8"
+    replace_value:            
+      main: "$workspace.$id"
+
+  #conn string sql endpoint del modelo semantico
+  - find_value: "zyac6zd57ajuplki3i3ba7skhm-i5cbgforpi7e7gja4e675hyqxa.datawarehouse.fabric.microsoft.com"
+    replace_value:
+      main: "zyac6zd57ajuplki3i3ba7skhm-xyukv35yvvmubor3qtbbo4omze.datawarehouse.fabric.microsoft.com"
+
+
+key_value_replace:
+  - find_key: $.variables[?(@.name=="workspace_name")].value
+    replace_value:
+      main: "PRO_DEMO_CICD"        
+    # Optional fields:
+    item_type: "VariableLibrary"
+    item_name: "vl_environment_variables"
+
+  - find_key: $.variables[?(@.name=="bronze_lakehouse_id")].value
+    replace_value:
+      main: "$items.Lakehouse.lh_bronze.id"        
+    # Optional fields:
+    item_type: "VariableLibrary"
+    item_name: "vl_environment_variables"
+
+  - find_key: $.variables[?(@.name=="gold_lakehouse_id")].value
+    replace_value:
+      main: "$items.Lakehouse.lh_gold.id"        
+    # Optional fields:
+    item_type: "VariableLibrary"
+    item_name: "vl_environment_variables"
+
+  - find_key: $.variables[?(@.name=="nt_01_load_csv_to_delta_id")].value
+    replace_value:
+      main: "$items.Notebook.01_load_csv_to_delta.id"        
+    # Optional fields:
+    item_type: "VariableLibrary"
+    item_name: "vl_environment_variables"
+
+  - find_key: $.variables[?(@.name=="nt_02_load_gold_id")].value
+    replace_value:
+      main: "$items.Notebook.02_load_gold.id"        
+    # Optional fields:
+    item_type: "VariableLibrary"
+    item_name: "vl_environment_variables"
+
+  - find_key: $.variables[?(@.name=="ds_sales_id")].value
+    replace_value:
+      main: "$items.SemanticModel.Sales Dataset.id"
+    # Optional fields:
+    item_type: "VariableLibrary"
+    item_name: "vl_environment_variables"
+
+
+
+semantic_model_binding:
+  models:
+    - semantic_model_name: ["Sales Dataset"]
+      connection_id:
+        main: "85a128fe-46c0-48b3-91da-2249f47df53f"        

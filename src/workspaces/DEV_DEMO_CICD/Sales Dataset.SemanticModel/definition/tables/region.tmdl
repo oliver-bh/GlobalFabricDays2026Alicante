@@ -1,0 +1,49 @@
+table region
+	lineageTag: f29fbdbf-1c57-4474-b00f-5966a21bb215
+
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bd0f9cb2-4ab3-449e-82f9-aa55300f3b99
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 1f890c3e-5f80-48ef-b842-21077265e36e
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 75878f23-7491-4e82-911b-33ee0c7aeb3d
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group
+		dataType: string
+		lineageTag: 88e3d096-1dd4-4baf-aa5f-867f10f8129a
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	partition region = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("zyac6zd57ajuplki3i3ba7skhm-i5cbgforpi7e7gja4e675hyqxa.datawarehouse.fabric.microsoft.com"),
+				    lh_gold = Source{[Name="lh_gold"]}[Data],
+				    dbo_region = lh_gold{[Schema="dbo",Item="region"]}[Data]
+				in
+				    dbo_region
+

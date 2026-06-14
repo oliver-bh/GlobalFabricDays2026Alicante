@@ -1,0 +1,173 @@
+table date
+	lineageTag: a0d6fe80-876a-4cad-8dbf-d911d01708e8
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 94ffc2d8-6c3d-4761-be55-b872419a5b44
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5b6fdff5-2383-47b0-b77a-68ddf90dab74
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 91ce6d59-4216-4f8c-9bae-1c7ea32c3c79
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 01fe0379-1914-4bd1-83e0-2d398b1528e1
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuarterName
+		dataType: string
+		lineageTag: 559a3da8-4325-4aed-833b-1cc30b34f21c
+		summarizeBy: none
+		sourceColumn: QuarterName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 40e64a57-e37b-4339-b8ba-c817a6291a65
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: e70cc57c-11c8-44d8-802f-cf217bb3b39c
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthShort
+		dataType: string
+		lineageTag: aaea1984-5dad-4d8f-a7ce-4a416e61bd2c
+		summarizeBy: none
+		sourceColumn: MonthShort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 8aa03ba5-2fd4-4ff0-b9e3-a4ef40ff9645
+		summarizeBy: none
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: f761fd8c-83bc-4521-9f3b-3e2948fa5342
+		summarizeBy: none
+		sourceColumn: DayOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayName
+		dataType: string
+		lineageTag: 2112bcc0-d230-4356-a9a8-a944692eb585
+		summarizeBy: none
+		sourceColumn: DayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayShort
+		dataType: string
+		lineageTag: 2fbdd2dd-d1e4-4ffe-b4d8-484eeba8c0cb
+		summarizeBy: none
+		sourceColumn: DayShort
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 8616af48-2e67-44dd-8bfc-ed525038c002
+		summarizeBy: none
+		sourceColumn: DayOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 9caa426f-a1b2-42a8-beef-8852f007da73
+		summarizeBy: none
+		sourceColumn: WeekOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: db27916c-73a8-40d0-a768-9a7e1e4309e0
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonthStr
+		dataType: string
+		lineageTag: 3cdb995d-d03b-4b67-9861-b11f3e2f2bfc
+		summarizeBy: none
+		sourceColumn: YearMonthStr
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearQuarter
+		dataType: string
+		lineageTag: 6065a097-7fc6-4dce-a3c7-fe6a2194b1ec
+		summarizeBy: none
+		sourceColumn: YearQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsWeekend
+		dataType: int64
+		formatString: 0
+		lineageTag: 490f99f2-27f3-4cbb-9df3-bb65284ded2d
+		summarizeBy: none
+		sourceColumn: IsWeekend
+
+		annotation SummarizationSetBy = Automatic
+
+	partition date = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("zyac6zd57ajuplki3i3ba7skhm-i5cbgforpi7e7gja4e675hyqxa.datawarehouse.fabric.microsoft.com"),
+				    lh_gold = Source{[Name="lh_gold"]}[Data],
+				    dbo_date = lh_gold{[Schema="dbo",Item="date"]}[Data]
+				in
+				    dbo_date
+

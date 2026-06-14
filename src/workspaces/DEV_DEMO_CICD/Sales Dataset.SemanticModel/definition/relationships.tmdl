@@ -1,0 +1,20 @@
+relationship AutoDetected_1c0fad90-35f0-4fe5-beb0-ae5fba00f48b
+	fromColumn: sales.ProductKey
+	toColumn: product.ProductKey
+
+relationship AutoDetected_01e9efe5-88d5-462b-bba0-d2a986126927
+	fromColumn: sales.SalesTerritoryKey
+	toColumn: region.SalesTerritoryKey
+
+relationship AutoDetected_980f164c-6b87-4afb-855f-438ee198bf26
+	fromColumn: sales.ResellerKey
+	toColumn: reseller.ResellerKey
+
+relationship AutoDetected_32ba5475-a1e3-4f38-a61a-9efad6096952
+	fromColumn: sales.EmployeeKey
+	toColumn: salesperson.EmployeeKey
+
+relationship b4dfb1fb-598d-5907-6871-23ce33e0eb05
+	fromColumn: sales.OrderDateKey
+	toColumn: date.DateKey
+

@@ -1,0 +1,151 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "csv to delta",
+        "type": "TridentNotebook",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": {
+            "value": "@pipeline().libraryVariables.vl_environment_variables_nt_01_load_csv_to_delta_id",
+            "type": "Expression"
+          },
+          "workspaceId": {
+            "value": "@pipeline().libraryVariables.vl_environment_variables_workspace_id",
+            "type": "Expression"
+          }
+        },
+        "externalReferences": {
+          "connection": "305b939f-8a08-445d-920b-f97638ac2506"
+        }
+      },
+      {
+        "name": "gold",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {
+            "activity": "csv to delta",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": {
+            "value": "@pipeline().libraryVariables.vl_environment_variables_nt_02_load_gold_id",
+            "type": "Expression"
+          },
+          "workspaceId": {
+            "value": "@pipeline().libraryVariables.vl_environment_variables_workspace_id",
+            "type": "Expression"
+          }
+        },
+        "externalReferences": {
+          "connection": "305b939f-8a08-445d-920b-f97638ac2506"
+        }
+      },
+      {
+        "name": "sales",
+        "type": "PBISemanticModelRefresh",
+        "dependsOn": [
+          {
+            "activity": "gold",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "method": "POST",
+          "operationType": "SemanticModelRefresh",
+          "groupId": {
+            "value": "@pipeline().libraryVariables.vl_environment_variables_workspace_id",
+            "type": "Expression"
+          },
+          "datasetId": {
+            "value": "@pipeline().libraryVariables.vl_environment_variables_ds_sales_id",
+            "type": "Expression"
+          },
+          "objects": [
+            {
+              "table": "date"
+            },
+            {
+              "table": "product"
+            },
+            {
+              "table": "region"
+            },
+            {
+              "table": "reseller"
+            },
+            {
+              "table": "sales"
+            },
+            {
+              "table": "salesperson"
+            }
+          ],
+          "waitOnCompletion": true,
+          "commitMode": "Transactional"
+        },
+        "externalReferences": {
+          "connection": "db9a1aac-9445-4e1a-86ea-4a90e1994954"
+        }
+      }
+    ],
+    "libraryVariables": {
+      "vl_environment_variables_workspace_name": {
+        "type": "String",
+        "variableName": "workspace_name",
+        "libraryName": "vl_environment_variables"
+      },
+      "vl_environment_variables_workspace_id": {
+        "type": "String",
+        "variableName": "workspace_id",
+        "libraryName": "vl_environment_variables"
+      },
+      "vl_environment_variables_nt_01_load_csv_to_delta_id": {
+        "type": "String",
+        "variableName": "nt_01_load_csv_to_delta_id",
+        "libraryName": "vl_environment_variables"
+      },
+      "vl_environment_variables_nt_01_load_csv_to_delta_id_1": {
+        "type": "String",
+        "variableName": "nt_01_load_csv_to_delta_id",
+        "libraryName": "vl_environment_variables"
+      },
+      "vl_environment_variables_nt_02_load_gold_id": {
+        "type": "String",
+        "variableName": "nt_02_load_gold_id",
+        "libraryName": "vl_environment_variables"
+      },
+      "vl_environment_variables_ds_sales_id": {
+        "type": "String",
+        "variableName": "ds_sales_id",
+        "libraryName": "vl_environment_variables"
+      }
+    }
+  }
+}

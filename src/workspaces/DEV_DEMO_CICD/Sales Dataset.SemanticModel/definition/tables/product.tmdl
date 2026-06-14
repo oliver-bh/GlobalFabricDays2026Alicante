@@ -1,0 +1,83 @@
+table product
+	lineageTag: 69538d03-0531-4c34-92eb-2e2d1d7a2f34
+
+	column ProductKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 165447b9-61c4-4b49-ad01-b8b37fc27ee9
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: b1276920-b7e0-4709-83a4-0399f8d54f44
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column StandardCost
+		dataType: double
+		lineageTag: 69bce613-c818-42a1-b2fd-8a9d00ca9d38
+		summarizeBy: none
+		sourceColumn: StandardCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Color
+		dataType: string
+		lineageTag: 846dc585-a713-45f6-b73a-b6f641ea46fb
+		summarizeBy: none
+		sourceColumn: Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subcategory
+		dataType: string
+		lineageTag: cb6c0252-8a58-4988-b366-fc517c25b2af
+		summarizeBy: none
+		sourceColumn: Subcategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 5cab8546-b11c-4ba7-851e-4a672e55e233
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column BackgroundColorFormat
+		dataType: string
+		lineageTag: ef7a9302-e4ab-43d4-9d33-0e255a0cb48c
+		summarizeBy: none
+		sourceColumn: BackgroundColorFormat
+
+		annotation SummarizationSetBy = Automatic
+
+	column FontColorFormat
+		dataType: string
+		lineageTag: fc97deff-b0b6-443b-a95e-eb970b65ec8d
+		summarizeBy: none
+		sourceColumn: FontColorFormat
+
+		annotation SummarizationSetBy = Automatic
+
+	partition product = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("zyac6zd57ajuplki3i3ba7skhm-i5cbgforpi7e7gja4e675hyqxa.datawarehouse.fabric.microsoft.com"),
+				    lh_gold = Source{[Name="lh_gold"]}[Data],
+				    dbo_product = lh_gold{[Schema="dbo",Item="product"]}[Data]
+				in
+				    dbo_product
+
